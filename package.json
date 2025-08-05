@@ -1,0 +1,31 @@
+{
+  "name": "clipboard-tester",
+  "description": "See what your clipboard contains!",
+  "license": "MIT",
+  "author": "clipboard-tester",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "start": "web-dev-server"
+  },
+  "dependencies": {
+    "lit": "^2.0.2",
+    "rollup-plugin-string-html": "^1.0.0"
+  },
+  "devDependencies": {
+    "@open-wc/building-rollup": "^3.0.2",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@web/dev-server": "^0.4.6",
+    "@web/rollup-plugin-html": "^2.3.0",
+    "@web/rollup-plugin-import-meta-assets": "^2.2.1",
+    "babel-plugin-template-html-minifier": "^4.1.0",
+    "deepmerge": "^4.3.1",
+    "rimraf": "^5.0.9",
+    "rollup": "^4.18.1",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "rollup-plugin-workbox": "^8.1.0"
+  },
+  "customElements": "custom-elements.json"
+}
