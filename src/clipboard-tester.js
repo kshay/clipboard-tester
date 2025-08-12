@@ -486,7 +486,8 @@ class PageFooter extends LitElement {
       Created by <a href="https://bsky.app/profile/kshay.com">Kevin Shay</a> •
       <a href
         @click=${this.handleFaqClick}
-      >FAQ</a>
+      >FAQ</a> • 
+      <a href="https://github.com/kshay/clipboard-tester">Code</a>
       <div class=${classMap(classes)}
       >
         <p class="question">
@@ -530,7 +531,7 @@ class PageFooter extends LitElement {
           Will you fix/improve/add something?
         </p>
         <p>
-          Sure. You can communicate via the <a href="">GitHub repo</a>.
+          Sure. You can communicate via the <a href="https://github.com/kshay/clipboard-tester">GitHub repo</a>.
         </p>
       </div>
     `;
