@@ -185,17 +185,13 @@ class DefaultItemRenderer extends ItemRenderer {
   }
 
   render() {
-    return html`(Cannot display)`;
+    return html`${this.item.data}`;
   }
 }
 
 class RtfItemRenderer extends ItemRenderer {
   displayName() {
     return 'Rich Text Format';
-  }
-
-  render() {
-    return html`${this.item.data}`;
   }
 }
 
@@ -204,11 +200,10 @@ class UriListItemRenderer extends ItemRenderer {
     return 'URI List';
   }
 
-  render() {
+  // render() {
     // TODO: something more interesting when there's >1 URI in the list?
     // can't seem to bring about that state of affairs to test
-    return html`${this.item.data}`;
-  }
+  //}
 }
 
 class TextItemRenderer extends ItemRenderer {
