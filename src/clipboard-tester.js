@@ -152,6 +152,10 @@ class ItemRenderer {
     return '';
   }
 
+  render() {
+    return html`${this.item.data}`;
+  }
+
   renderWrapper(item, position) {
     this.item = item;
     this.position = position;
@@ -182,10 +186,6 @@ class ItemRenderer {
 class DefaultItemRenderer extends ItemRenderer {
   displayName() {
     return this.item.type;
-  }
-
-  render() {
-    return html`${this.item.data}`;
   }
 }
 
