@@ -195,6 +195,34 @@ class RtfItemRenderer extends ItemRenderer {
   }
 }
 
+class VcardItemRenderer extends ItemRenderer {
+  displayName() {
+    return 'vCard';
+  }
+
+  wrapperClass() {
+    return 'plain-text';
+  }
+
+  renderControls() {
+    const downloadLink = document.createElement('a');
+    downloadLink.innerText = 'Download .vcf';
+    downloadLink.download = 'vcard-from-clipboard.vcf';
+    downloadLink.href = URL.createObjectURL(this.item.file);
+    return html`<div class="controls">
+      ${downloadLink}
+    </div>`;
+  }
+
+  render() {
+    const div = document.createElement('div');
+    this.item.file.text().then((text) => {
+      div.innerText = text;
+    })
+    return div;
+  }
+}
+
 class UriListItemRenderer extends ItemRenderer {
   displayName() {
     return 'URI List';
@@ -284,6 +312,7 @@ const CLASS_MAP = {
   'text/plain': TextItemRenderer,
   'text/rtf': RtfItemRenderer,
   'text/uri-list': UriListItemRenderer,
+  'text/vcard': VcardItemRenderer,
 };
 
 class ClipboardItem extends LitElement {
