@@ -408,6 +408,7 @@ class PasteResults extends LitElement {
       gap: 10px;
       justify-content: center;
       margin: 10px;
+      padding-bottom: 40px;
     }
     .no-results {
       margin: 10px;
@@ -463,7 +464,7 @@ class PageFooter extends LitElement {
       left: 10vw;
       max-height: 80vh;
       overflow: scroll;
-      padding: 20px;
+      padding: 0 20px;
       position: fixed;
       text-align: left;
       top: 20px;
@@ -480,7 +481,6 @@ class PageFooter extends LitElement {
       width: 100%;
       height: 100%;
       background-color: transparent;
-      color: blue;
       z-index: 100;
     }
   `;
