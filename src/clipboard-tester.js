@@ -141,6 +141,11 @@ class PasteReceiver extends LitElement {
 }
 
 class ItemRenderer {
+  constructor(item, position) {
+    this.item = item;
+    this.position = position;
+  }
+
   notifyToggle() {
       const evt = new CustomEvent('control-toggled', {
         composed: true,
@@ -156,9 +161,7 @@ class ItemRenderer {
     return html`${this.item.data}`;
   }
 
-  renderWrapper(item, position) {
-    this.item = item;
-    this.position = position;
+  renderWrapper() {
     return html`
       <div class="item-wrapper ${this.wrapperClass()}">
         ${this.renderHeading()}
@@ -235,8 +238,9 @@ class UriListItemRenderer extends ItemRenderer {
 }
 
 class TextItemRenderer extends ItemRenderer {
-  constructor() {
-    super();
+  constructor(item, position) {
+    super(item, position);
+    this.item.data = this.item.data.replaceAll('\r', '\n');
     this.preInput = document.createElement('input');
     this.preInput.type = 'checkbox';
     this.preInput.onclick = this.notifyToggle;
@@ -263,8 +267,8 @@ class TextItemRenderer extends ItemRenderer {
 }
 
 class HtmlItemRenderer extends ItemRenderer {
-  constructor() {
-    super();
+  constructor(item, position) {
+    super(item, position);
     this.showCodeInput = document.createElement('input');
     this.showCodeInput.type = 'checkbox';
     this.showCodeInput.onclick = this.notifyToggle;
@@ -380,9 +384,9 @@ class ClipboardItem extends LitElement {
     }
     let cls = CLASS_MAP[this.item.type] || DefaultItemRenderer;
     if (!this.itemRenderer || !(this.itemRenderer instanceof cls)) {
-      this.itemRenderer = new cls();
+      this.itemRenderer = new cls(this.item, this.position);
     }
-    return this.itemRenderer.renderWrapper(this.item, this.position);
+    return this.itemRenderer.renderWrapper();
   }
 }
 
@@ -510,7 +514,7 @@ class PageFooter extends LitElement {
       Created by <a href="https://bsky.app/profile/kshay.com">Kevin Shay</a> •
       <a href
         @click=${this.handleFaqClick}
-      >FAQ</a> • 
+      >FAQ</a> •
       <a href="https://github.com/kshay/clipboard-tester">Code</a>
       <div class=${classMap(classes)}
       >
