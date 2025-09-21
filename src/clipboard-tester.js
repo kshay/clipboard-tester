@@ -383,9 +383,7 @@ class ClipboardItem extends LitElement {
       return html``;
     }
     let cls = CLASS_MAP[this.item.type] || DefaultItemRenderer;
-    if (!this.itemRenderer || !(this.itemRenderer instanceof cls)) {
-      this.itemRenderer = new cls(this.item, this.position);
-    }
+    this.itemRenderer = new cls(this.item, this.position);
     return this.itemRenderer.renderWrapper();
   }
 }
