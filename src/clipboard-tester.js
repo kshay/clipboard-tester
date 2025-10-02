@@ -146,6 +146,10 @@ class ItemRenderer {
     this.position = position;
   }
 
+  displayName() {
+    return this.item.type;
+  }
+
   notifyToggle() {
       const evt = new CustomEvent('control-toggled', {
         composed: true,
@@ -191,12 +195,6 @@ class ItemRenderer {
 
   renderControls() {
     return html``;
-  }
-}
-
-class DefaultItemRenderer extends ItemRenderer {
-  displayName() {
-    return this.item.type;
   }
 }
 
@@ -411,7 +409,7 @@ class ClipboardItem extends LitElement {
     if (!this.item) {
       return html``;
     }
-    let cls = CLASS_MAP[this.item.type] || DefaultItemRenderer;
+    let cls = CLASS_MAP[this.item.type] || ItemRenderer;
     if (this.item !== this.prevItem) {
       this.itemRenderer = new cls(this.item, this.position);
       this.prevItem = this.item;
