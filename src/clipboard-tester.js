@@ -161,6 +161,14 @@ class ItemRenderer {
     return html`${this.item.data}`;
   }
 
+  renderFileText() {
+    const div = document.createElement('div');
+    this.item.file.text().then((text) => {
+      div.innerText = text;
+    })
+    return div;
+  }
+
   renderWrapper() {
     return html`
       <div class="item-wrapper ${this.wrapperClass()}">
@@ -198,6 +206,30 @@ class RtfItemRenderer extends ItemRenderer {
   }
 }
 
+class CalendarItemRenderer extends ItemRenderer {
+  displayName() {
+    return 'vCalendar';
+  }
+
+  wrapperClass() {
+    return 'plain-text';
+  }
+
+  renderControls() {
+    const downloadLink = document.createElement('a');
+    downloadLink.innerText = 'Download .ics';
+    downloadLink.download = 'vcard-from-clipboard.ics';
+    downloadLink.href = URL.createObjectURL(this.item.file);
+    return html`<div class="controls">
+      ${downloadLink}
+    </div>`;
+  }
+
+  render() {
+    return this.renderFileText();
+  }
+}
+
 class VcardItemRenderer extends ItemRenderer {
   displayName() {
     return 'vCard';
@@ -218,11 +250,7 @@ class VcardItemRenderer extends ItemRenderer {
   }
 
   render() {
-    const div = document.createElement('div');
-    this.item.file.text().then((text) => {
-      div.innerText = text;
-    })
-    return div;
+    return this.renderFileText();
   }
 }
 
@@ -312,6 +340,7 @@ class ImageItemRenderer extends ItemRenderer {
 const CLASS_MAP = {
   'image/jpeg': ImageItemRenderer,
   'image/png': ImageItemRenderer,
+  'text/calendar': CalendarItemRenderer,
   'text/html': HtmlItemRenderer,
   'text/plain': TextItemRenderer,
   'text/rtf': RtfItemRenderer,
